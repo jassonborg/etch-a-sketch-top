@@ -18,6 +18,15 @@ function buildGrid(x, y, cellSize, gridElement) {
         square.style.setProperty('--square-size', squareSize);
         square.style.setProperty('--square-height', squareSize);
 
+        //Mouse hover in and out
+        square.addEventListener('mouseover',() => {
+            square.style.border = '1px solid white';
+          })
+        
+          square.addEventListener('mouseout',() => {
+            square.style.border = '';
+          })
+
         squares.appendChild(square);
     }
 
