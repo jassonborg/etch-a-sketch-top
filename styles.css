@@ -7,6 +7,14 @@ body {
     background-color: #f0f0f0;
 }
 
+.container {
+    text-align: center;
+}
+
+#resizeButton {
+  margin-bottom: 20px;
+}
+
 .grid {
     display: flex;
     flex-wrap: wrap;
