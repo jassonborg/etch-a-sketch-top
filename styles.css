@@ -28,4 +28,5 @@ body {
     height: var(--square-height);
     border: 1px solid black;
     box-sizing: border-box;
+    opacity: 0;
 }

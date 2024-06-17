@@ -18,17 +18,27 @@ function buildGrid(size, gridElement) {
         square.style.setProperty('--square-size', squareSize);
         square.style.setProperty('--square-height', squareSize);
   
-        //Mouse hover in and out
+        //Mouse hover - if bg color is set, skip randomize
         square.addEventListener('mouseover',() => {
-            let r = Math.floor(Math.random() * 256);
-            let g = Math.floor(Math.random() * 256);
-            let b = Math.floor(Math.random() * 256);
-            square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-          })
-        
-          square.addEventListener('mouseout',() => {
-            square.style.backgroundColor = '';
-          })
+            if (!square.dataset.color) {
+                // Generate a new random color
+                let r = Math.floor(Math.random() * 256);
+                let g = Math.floor(Math.random() * 256);
+                let b = Math.floor(Math.random() * 256);
+     
+                // Store the color in a custom data attribute
+                square.dataset.color = `rgb(${r}, ${g}, ${b})`;
+     
+                // Set the background color
+                square.style.backgroundColor = square.dataset.color;
+     }
+     
+     //Increase opacity
+     if (square.style.opacity <= 1) {
+     square.style.opacity = +square.style.opacity + 0.1;
+     // +e.style.opacity converts opacity from string to number
+     }
+  });
   
         squares.appendChild(square);
     }
