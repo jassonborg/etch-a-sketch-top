@@ -1,15 +1,15 @@
-function buildGrid(x, y, cellSize, gridElement) {
-    // Calculate the dimensions based on cellSize
-    let gridWidth = x * cellSize;
-    let gridHeight = y * cellSize;
-
+function buildGrid(size, gridElement) {
+    const gridSize = 500;
+    
+    const cellSize = gridSize / size;
+  
     // Set CSS variables on gridElement
-    gridElement.style.setProperty('--grid-width', `${gridWidth}px`);
-    gridElement.style.setProperty('--grid-height', `${gridHeight}px`);
-
+    gridElement.style.setProperty('--grid-width', `${gridSize}px`);
+    gridElement.style.setProperty('--grid-height', `${gridSize}px`);
+  
     let squares = new DocumentFragment();
-
-    for (let i = 0; i < x * y; i++) {
+  
+    for (let i = 0; i < size * size; i++) {
         let square = document.createElement('div');
         square.className = 'square';
         
@@ -17,7 +17,7 @@ function buildGrid(x, y, cellSize, gridElement) {
         let squareSize = `${cellSize}px`;
         square.style.setProperty('--square-size', squareSize);
         square.style.setProperty('--square-height', squareSize);
-
+  
         //Mouse hover in and out
         square.addEventListener('mouseover',() => {
             square.style.border = '1px solid white';
@@ -26,11 +26,29 @@ function buildGrid(x, y, cellSize, gridElement) {
           square.addEventListener('mouseout',() => {
             square.style.border = '';
           })
-
+  
         squares.appendChild(square);
     }
-
+    gridElement.innerHTML = '';
     gridElement.appendChild(squares);
-}
-
-buildGrid(16, 16, 30, document.querySelector('.grid'));
+  }
+  
+  
+  function promptGridSize() {
+      let newSize = prompt('Enter number of squares per side (max 100):');
+      newSize = parseInt(newSize);
+  
+      if (newSize && newSize > 0 && newSize <= 100) {
+          buildGrid(newSize, document.querySelector('.grid'));
+      } else {
+          alert('Please enter a valid number between 1 and 100.');
+          promptGridSize();
+      }
+  }
+  
+  document.getElementById('newButton').addEventListener('click', promptGridSize);
+  
+  // Default grid
+  document.addEventListener('DOMContentLoaded', function() {
+      buildGrid(16, document.querySelector('.grid')); 
+  });
