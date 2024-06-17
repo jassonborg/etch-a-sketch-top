@@ -20,11 +20,14 @@ function buildGrid(size, gridElement) {
   
         //Mouse hover in and out
         square.addEventListener('mouseover',() => {
-            square.style.border = '1px solid white';
+            let r = Math.floor(Math.random() * 256);
+            let g = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
           })
         
           square.addEventListener('mouseout',() => {
-            square.style.border = '';
+            square.style.backgroundColor = '';
           })
   
         squares.appendChild(square);
